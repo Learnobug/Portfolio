@@ -28,8 +28,8 @@ const roles = [
   {
     title: "Software Engineer Intern",
     company: "Google",
-    badge: "SUMMER 2024",
-    period: "June — September 2024",
+    badge: "SUMMER 2025",
+    period: "June — September 2025",
     location: "Bangalore, India",
     team: "Application Integration — GCP",
     badgeActive: false,
@@ -412,7 +412,7 @@ export default function Experience() {
                     </div>
                     <div>
                       <h5 className="text-base font-bold text-[#e2e2e6]" style={{ fontFamily: FONT_HEADLINE }}>Google SWE Intern</h5>
-                      <p className="text-[10px] uppercase text-[#a8c7fa]" style={{ fontFamily: FONT_LABEL }}>Bangalore · Summer 2024</p>
+                      <p className="text-[10px] uppercase text-[#a8c7fa]" style={{ fontFamily: FONT_LABEL }}>Bangalore · Summer 2025</p>
                     </div>
                   </motion.div>
                 </div>

@@ -1,6 +1,8 @@
 "use client";
 
 import { FadeUp, Stagger, motion, fadeUp } from "./motion";
+import TypeWriter from "./TypeWriter";
+import MagneticButton from "./MagneticButton";
 
 const FONT_HEADLINE = "var(--font-space-grotesk), Space Grotesk, sans-serif";
 const FONT_MONO = "var(--font-roboto-mono), Roboto Mono, monospace";
@@ -12,8 +14,8 @@ const INPUT_CLS =
 
 const logLines = [
   { tag: "SECURE_LINK", text: "initializing port 8080..." },
-  { tag: "QUERY", text: <>identity: <span className="text-[#e2e2e6]">Gunjan Aggarwal</span></> },
-  { tag: "RESOLVE", text: <>role: <span className="text-[#e2e2e6]">Senior_Backend_Engineer</span></> },
+  { tag: "QUERY", text: "identity: Gunjan Aggarwal" },
+  { tag: "RESOLVE", text: "role: Senior_Backend_Engineer" },
   { tag: "LOAD", text: "components: MERN, Next.js, Node.js, AWS, Linux..." },
   { tag: "SUCCESS", text: "handshake_complete: status_200", cyan: true },
 ];
@@ -66,15 +68,7 @@ export default function Contact() {
                 <span className="text-[#00dbec]">[SYSTEM_LOG]</span>
                 <span className="opacity-40">v4.0.2-stable</span>
               </div>
-              <Stagger className="space-y-1" fast>
-                {logLines.map((line, i) => (
-                  <motion.p key={i} variants={fadeUp}>
-                    <span className={line.cyan ? "text-[#00dbec]" : "text-[#edc225]"}>{line.tag}</span>{" "}
-                    {line.text}
-                  </motion.p>
-                ))}
-                <motion.p variants={fadeUp} className="animate-pulse">_</motion.p>
-              </Stagger>
+              <TypeWriter lines={logLines} speed={22} lineDelay={180} className="space-y-1" />
             </div>
 
             {/* Access nodes */}
@@ -136,16 +130,14 @@ export default function Contact() {
               </FadeUp>
 
               <FadeUp delay={0.2}>
-                <motion.button
+                <MagneticButton
                   type="submit"
                   className="w-full bg-[#00edff] text-[#006770] py-5 rounded-lg font-bold text-base md:text-lg tracking-widest uppercase flex items-center justify-center gap-3"
                   style={{ fontFamily: FONT_HEADLINE }}
-                  whileHover={{ opacity: 0.92, scale: 1.01 }}
-                  whileTap={{ scale: 0.97 }}
                 >
                   <span>Execute Transmission</span>
                   <motion.span className="material-symbols-outlined" animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>send</motion.span>
-                </motion.button>
+                </MagneticButton>
               </FadeUp>
 
               <div className="flex flex-wrap items-center justify-center gap-3 text-[#849495] text-[0.65rem] opacity-50" style={{ fontFamily: FONT_MONO }}>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "./motion";
+import ScrambleText from "./ScrambleText";
 
 const container = {
   hidden: {},
@@ -47,8 +48,10 @@ export default function Hero() {
           className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tighter text-[#e2e2e6] mb-4 md:mb-6 leading-[0.9]"
           style={{ fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif" }}
         >
-          Gunjan{" "}
-          <span className="text-[#00dbec] text-glow">Aggarwal</span>
+          <ScrambleText text="Gunjan" delay={400} duration={700} />{" "}
+          <span className="text-[#00dbec] text-glow">
+            <ScrambleText text="Aggarwal" delay={600} duration={900} />
+          </span>
         </motion.h1>
 
         {/* Subheading */}

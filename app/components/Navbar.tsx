@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import MagneticButton from "./MagneticButton";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -79,18 +80,24 @@ export default function Navbar() {
               {link.label}
             </motion.a>
           ))}
-          <motion.a
-            href="https://drive.google.com/file/d/1HbPj7iIZyznaCfsEPCB4K_MIxNPGmzOC/view?usp=drivesdk"
-            className="ml-4 px-5 py-1.5 bg-[#00edff] text-[#006770] text-xs font-bold uppercase tracking-widest rounded-sm"
-            style={{ fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif" }}
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5 }}
-            whileHover={{ opacity: 0.9 }}
-            whileTap={{ scale: 0.95 }}
+            className="ml-4"
           >
-            Resume
-          </motion.a>
+            <MagneticButton
+              as="a"
+              href="https://drive.google.com/file/d/1HbPj7iIZyznaCfsEPCB4K_MIxNPGmzOC/view?usp=drivesdk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-1.5 bg-[#00edff] text-[#006770] text-xs font-bold uppercase tracking-widest rounded-sm inline-block"
+              style={{ fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif" }}
+              strength={0.25}
+            >
+              Resume
+            </MagneticButton>
+          </motion.div>
         </div>
 
         {/* Mobile Hamburger */}

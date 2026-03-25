@@ -1,6 +1,7 @@
 "use client";
 
 import { FadeUp, Stagger, motion, fadeUp } from "./motion";
+import TiltCard from "./TiltCard";
 
 const FONT_HEADLINE = "var(--font-space-grotesk), Space Grotesk, sans-serif";
 const FONT_MONO = "var(--font-roboto-mono), Roboto Mono, monospace";
@@ -38,10 +39,9 @@ export default function Projects() {
 
         {/* RelayEdge */}
         <FadeUp className="md:col-span-8" delay={0.05}>
-          <motion.div
+          <TiltCard className="h-full">
+          <div
             className="glass-card rounded-xl p-8 h-full flex flex-col justify-between"
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.3 }}
           >
             <div>
               <div className="flex justify-between items-start mb-6">
@@ -86,11 +86,13 @@ export default function Projects() {
                 <span className="material-symbols-outlined text-sm">code</span>
               </div>
             </div>
-          </motion.div>
+          </div>
+          </TiltCard>
         </FadeUp>
 
         {/* Sentinel */}
         <FadeUp className="md:col-span-4" delay={0.15}>
+          <TiltCard className="h-full">
           <div className="bg-[#1a1c1f] rounded-xl p-8 h-full flex flex-col group hover:bg-[#1e2023] transition-colors duration-300">
             <div className="mb-6 h-48 overflow-hidden rounded-lg bg-[#0c0e11] shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -118,6 +120,7 @@ export default function Projects() {
               View on GitHub <span className="material-symbols-outlined text-xs">open_in_new</span>
             </motion.a>
           </div>
+          </TiltCard>
         </FadeUp>
 
         {/* API Monitor */}
@@ -206,7 +209,8 @@ export default function Projects() {
 
         {/* VR-Connect */}
         <FadeUp className="md:col-span-4" delay={0.05}>
-          <motion.div className="bg-[#1e2023] rounded-xl p-8 h-full flex flex-col" whileHover={{ y: -4 }} transition={{ duration: 0.3 }}>
+          <TiltCard className="h-full">
+          <div className="bg-[#1e2023] rounded-xl p-8 h-full flex flex-col">
             <motion.span className="material-symbols-outlined text-[#00dbec] mb-4" animate={{ rotate: [0, 10, -10, 0] }} transition={{ repeat: Infinity, duration: 4 }}>
               settings_input_component
             </motion.span>
@@ -228,7 +232,8 @@ export default function Projects() {
             >
               View Project <span className="material-symbols-outlined text-sm">open_in_new</span>
             </motion.a>
-          </motion.div>
+          </div>
+          </TiltCard>
         </FadeUp>
 
         {/* Hobostays */}
