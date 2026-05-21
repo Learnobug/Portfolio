@@ -251,6 +251,7 @@ export default function Projects() {
                   { icon: "query_stats", url: "scrapper.hobostays.in", href: "https://scrapper.hobostays.in", label: "Extraction" },
                   { icon: "shopping_bag", url: "hobostays.in", href: "https://hobostays.in", label: "Consumer" },
                   { icon: "android", url: "Play Store — Live", href: "https://play.google.com/store/apps/details?id=com.hobopmssorganization.hobostays", label: "Android App" },
+                  { icon: "phone_iphone", url: "App Store — Live", href: "https://apps.apple.com/in/app/hobostays/id6760900613", label: "iOS App" },
                 ].map((item) => (
                   <motion.a
                     key={item.url}
@@ -267,9 +268,6 @@ export default function Projects() {
                   </motion.a>
                 ))}
               </div>
-              <p className="text-[10px] text-[#b4cad6]/50 mt-2" style={{ fontFamily: FONT_MONO }}>
-                iOS App Store — coming soon
-              </p>
             </div>
             <div className="w-full md:w-64 h-64 bg-[#0c0e11] rounded-lg overflow-hidden border border-[#3b494b]/20 relative shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}

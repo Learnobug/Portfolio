@@ -88,7 +88,7 @@ export default function Navbar() {
           >
             <MagneticButton
               as="a"
-              href="https://drive.google.com/file/d/1HbPj7iIZyznaCfsEPCB4K_MIxNPGmzOC/view?usp=drivesdk"
+              href="https://drive.google.com/file/d/1blgTIg-ijwoFHaLZYa46DKS94NJhSDtM/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-1.5 bg-[#00edff] text-[#006770] text-xs font-bold uppercase tracking-widest rounded-sm inline-block"
@@ -147,7 +147,7 @@ export default function Navbar() {
               </motion.a>
             ))}
             <motion.a
-              href="https://drive.google.com/file/d/1HbPj7iIZyznaCfsEPCB4K_MIxNPGmzOC/view?usp=drivesdk"
+              href="https://drive.google.com/file/d/1blgTIg-ijwoFHaLZYa46DKS94NJhSDtM/view?usp=sharing"
               className="mt-2 px-5 py-2 bg-[#00edff] text-[#006770] text-xs font-bold uppercase tracking-widest rounded-sm text-center"
               style={{ fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif" }}
               initial={{ opacity: 0 }}
