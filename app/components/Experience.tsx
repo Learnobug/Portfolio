@@ -12,7 +12,7 @@ const roles = [
   {
     title: "Software Engineer",
     company: "Radiant Horizon Hospitality",
-    badge: "PRESENT",
+    badge: null,
     period: null,
     location: null,
     team: null,
@@ -238,19 +238,21 @@ export default function Experience() {
                         </div>
 
                         {/* Badge */}
-                        <motion.span
-                          className="self-start text-xs px-3 py-1 rounded-full border font-bold"
-                          style={{
-                            fontFamily: FONT_MONO,
-                            backgroundColor: "rgba(66,133,244,0.1)",
-                            borderColor: "rgba(66,133,244,0.3)",
-                            color: "#4285f4",
-                          }}
-                          animate={{ borderColor: ["rgba(66,133,244,0.3)", "rgba(66,133,244,0.7)", "rgba(66,133,244,0.3)"] }}
-                          transition={{ repeat: Infinity, duration: 2 }}
-                        >
-                          {role.badge}
-                        </motion.span>
+                        {role.badge && (
+                          <motion.span
+                            className="self-start text-xs px-3 py-1 rounded-full border font-bold"
+                            style={{
+                              fontFamily: FONT_MONO,
+                              backgroundColor: "rgba(66,133,244,0.1)",
+                              borderColor: "rgba(66,133,244,0.3)",
+                              color: "#4285f4",
+                            }}
+                            animate={{ borderColor: ["rgba(66,133,244,0.3)", "rgba(66,133,244,0.7)", "rgba(66,133,244,0.3)"] }}
+                            transition={{ repeat: Infinity, duration: 2 }}
+                          >
+                            {role.badge}
+                          </motion.span>
+                        )}
                       </div>
 
                       {/* Meta chips */}
@@ -315,12 +317,14 @@ export default function Experience() {
                           {role.company}
                         </p>
                       </div>
-                      <span
-                        className="text-xs px-3 py-1 self-start bg-[#00edff]/10 text-[#00dbec] rounded-full"
-                        style={{ fontFamily: FONT_MONO }}
-                      >
-                        {role.badge}
-                      </span>
+                      {role.badge && (
+                        <span
+                          className="text-xs px-3 py-1 self-start bg-[#00edff]/10 text-[#00dbec] rounded-full"
+                          style={{ fontFamily: FONT_MONO }}
+                        >
+                          {role.badge}
+                        </span>
+                      )}
                     </div>
                     <div className="space-y-3">
                       {role.achievements.map((ach, j) => (
