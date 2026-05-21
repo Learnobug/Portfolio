@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { JSX } from "react";
 
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&";
 
@@ -23,7 +24,7 @@ export default function ScrambleText({
 }: ScrambleTextProps) {
   const [display, setDisplay] = useState(text);
   const raf = useRef<number>(0);
-  const timeout = useRef<ReturnType<typeof setTimeout>>();
+  const timeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     if (!trigger) return;
@@ -67,6 +68,5 @@ export default function ScrambleText({
     };
   }, [text, trigger, delay, duration]);
 
-  // @ts-expect-error dynamic tag
   return <Tag className={className}>{display}</Tag>;
 }
