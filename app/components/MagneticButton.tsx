@@ -14,6 +14,7 @@ interface MagneticButtonProps {
   rel?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export default function MagneticButton({
@@ -27,6 +28,7 @@ export default function MagneticButton({
   rel,
   onClick,
   type,
+  disabled,
 }: MagneticButtonProps) {
   const btnRef = useRef<HTMLButtonElement>(null);
   const aRef = useRef<HTMLAnchorElement>(null);
@@ -67,7 +69,7 @@ export default function MagneticButton({
   }
 
   return (
-    <motion.button ref={btnRef} type={type} {...commonProps}>
+    <motion.button ref={btnRef} type={type} disabled={disabled} {...commonProps}>
       {children}
     </motion.button>
   );

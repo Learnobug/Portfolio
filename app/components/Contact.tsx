@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { FadeUp, Stagger, motion, fadeUp } from "./motion";
 import MagneticButton from "./MagneticButton";
 
@@ -7,11 +8,45 @@ const FONT_HEADLINE = "var(--font-space-grotesk), Space Grotesk, sans-serif";
 const FONT_MONO = "var(--font-roboto-mono), Roboto Mono, monospace";
 const FONT_LABEL = "var(--font-space-grotesk), Space Grotesk, sans-serif";
 
+// Get a free key at https://web3forms.com (messages are delivered to your email).
+const WEB3FORMS_ACCESS_KEY = "f8d09bf7-7dbe-463c-afcf-fcf2be6db477";
+
 const LABEL_CLS = "block text-[0.6875rem] uppercase tracking-widest text-[#849495] mb-2";
 const INPUT_CLS =
   "w-full bg-transparent border-0 border-b-2 border-[#3b494b] focus:border-[#00edff] focus:outline-none focus:ring-0 text-base py-3 placeholder:text-[#5a6668] transition-all duration-200 text-[#e2e2e6]";
 
+type Status = "idle" | "submitting" | "success" | "error";
+
 export default function Contact() {
+  const [status, setStatus] = useState<Status>("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setStatus("submitting");
+
+    const formData = new FormData(form);
+    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+    formData.append("subject", "New message from your portfolio");
+    formData.append("from_name", "Portfolio Contact Form");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <section id="contact" className="max-w-7xl mx-auto px-6 md:px-8 mb-24 md:mb-32 relative">
       {/* Header */}
@@ -87,27 +122,30 @@ export default function Contact() {
               <p className="text-sm text-[#849495]">Fill in a few details and hit send.</p>
             </div>
 
-            <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-8" onSubmit={handleSubmit}>
+              {/* Honeypot spam trap — hidden from real users */}
+              <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+
               <Stagger className="grid grid-cols-1 sm:grid-cols-2 gap-8" fast>
                 {[
-                  { label: "First name", placeholder: "Jane", type: "text", autoComplete: "given-name" },
-                  { label: "Last name", placeholder: "Doe", type: "text", autoComplete: "family-name" },
+                  { label: "First name", name: "first_name", placeholder: "Jane", type: "text", autoComplete: "given-name" },
+                  { label: "Last name", name: "last_name", placeholder: "Doe", type: "text", autoComplete: "family-name" },
                 ].map((field) => (
                   <motion.div key={field.label} variants={fadeUp}>
                     <label className={LABEL_CLS} style={{ fontFamily: FONT_LABEL }}>{field.label}</label>
-                    <input type={field.type} placeholder={field.placeholder} autoComplete={field.autoComplete} className={INPUT_CLS} />
+                    <input type={field.type} name={field.name} placeholder={field.placeholder} autoComplete={field.autoComplete} required className={INPUT_CLS} />
                   </motion.div>
                 ))}
               </Stagger>
 
               <FadeUp delay={0.1}>
                 <label className={LABEL_CLS} style={{ fontFamily: FONT_LABEL }}>Email</label>
-                <input type="email" placeholder="you@company.com" autoComplete="email" className={INPUT_CLS} />
+                <input type="email" name="email" placeholder="you@company.com" autoComplete="email" required className={INPUT_CLS} />
               </FadeUp>
 
               <FadeUp delay={0.15}>
                 <label className={LABEL_CLS} style={{ fontFamily: FONT_LABEL }}>Message</label>
-                <textarea rows={6} placeholder="Tell me about the project, role, or idea…" className={`${INPUT_CLS} resize-none`} />
+                <textarea rows={6} name="message" placeholder="Tell me about the project, role, or idea…" required className={`${INPUT_CLS} resize-none`} />
               </FadeUp>
 
               <FadeUp delay={0.2} className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-6 pt-2">
@@ -116,13 +154,27 @@ export default function Contact() {
                 </p>
                 <MagneticButton
                   type="submit"
-                  className="bg-[#00edff] text-[#006770] px-8 py-4 rounded-full font-bold text-base flex items-center justify-center gap-2 shrink-0"
+                  disabled={status === "submitting"}
+                  className="bg-[#00edff] text-[#006770] px-8 py-4 rounded-full font-bold text-base flex items-center justify-center gap-2 shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{ fontFamily: FONT_HEADLINE }}
                 >
-                  <span>Send message</span>
+                  <span>{status === "submitting" ? "Sending…" : "Send message"}</span>
                   <motion.span className="material-symbols-outlined text-lg" animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>arrow_forward</motion.span>
                 </MagneticButton>
               </FadeUp>
+
+              {status === "success" && (
+                <p className="text-sm text-[#00edff] flex items-center gap-2" style={{ fontFamily: FONT_MONO }}>
+                  <span className="material-symbols-outlined text-base">check_circle</span>
+                  Thanks! Your message is on its way — I&apos;ll reply soon.
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-[#ffb4ab] flex items-center gap-2" style={{ fontFamily: FONT_MONO }}>
+                  <span className="material-symbols-outlined text-base">error</span>
+                  Something went wrong. Email me directly at aggarwalgunjan597@gmail.com.
+                </p>
+              )}
             </form>
           </div>
         </FadeUp>
